@@ -1,2 +1,3 @@
 onnxruntime
 fastapi
+ray[serve]
