@@ -14,7 +14,6 @@ import base64
 from typing import Union, Dict, List
 import json
 from ray import serve
-from datetime import datetime
 
 class DecodingException(Exception):
 
@@ -31,14 +30,7 @@ class RequestBody(BaseModel):
 
 app = FastAPI()
 
-default_app_name = f"onnx_serve_{datetime.fromtimestamp(datetime.now().timestamp())}" \
-                    .replace("-", "_") \
-                    .replace(" ", "_") \
-                    .replace(":", "_")
-APP_NAME = os.environ.get("APP_NAME", default_app_name)
-print(f"Using App name = {APP_NAME}")
-
-@serve.deployment(name = APP_NAME,
+@serve.deployment(name = "ONNX",
                   route_prefix="/",
                   user_config={
                       "model_name": "model.onnx",
